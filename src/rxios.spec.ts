@@ -1,43 +1,16 @@
-jest.setTimeout(20000);
-
-import { rxios, Rxios } from '../src';
 import * as nock from 'nock';
+
+import { Rxios } from './rxios';
 
 const mockServer = nock('http://test.com');
 
-describe('Instantiation', () => {
-  let rxiosInstance: rxios;
-
-  afterEach(() => {
-    rxiosInstance = null;
-  });
-
-  it('works with new rxios()', () => {
-    rxiosInstance = new rxios({
-      baseURL: 'http://test.com/',
-    });
-    expect(rxiosInstance).toBeInstanceOf(rxios);
-  });
-
-  it('also works with new Rxios()', () => {
-    rxiosInstance = new Rxios({
-      baseURL: 'http://test.com/',
-    });
-    expect(rxiosInstance).toBeInstanceOf(rxios);
-  });
-});
-
 describe('GET method', () => {
-  let rxiosInstance: rxios;
+  let rxiosInstance: Rxios;
 
   beforeEach(() => {
-    rxiosInstance = new rxios({
-      baseURL: 'http://test.com/',
+    rxiosInstance = new Rxios({
+      baseURL: 'http://test.com/'
     });
-  });
-
-  afterEach(() => {
-    rxiosInstance = null;
   });
 
   it('makes a successful GET req', async () => {
@@ -45,10 +18,10 @@ describe('GET method', () => {
     mockServer.get('/posts/1').reply(200, expected);
     const promise = new Promise((resolve, reject) => {
       rxiosInstance.get('http://test.com/posts/1').subscribe(
-        resp => {
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -57,16 +30,14 @@ describe('GET method', () => {
   });
 
   it('throws an error on a failed GET req', async () => {
-    mockServer
-      .get('/posts/1')
-      .replyWithError('Request failed with status code 500');
+    mockServer.get('/posts/1').replyWithError('Request failed with status code 500');
 
     const promise = new Promise((resolve, reject) => {
       rxiosInstance.get('http://test.com/posts/1').subscribe(
-        resp => {
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -80,34 +51,32 @@ describe('GET method', () => {
       .query({ title: 'rxios', author: 'davguij' })
       .reply(200);
     const promise = new Promise((resolve, reject) => {
-      rxiosInstance
-        .get('http://test.com/posts', { title: 'rxios', author: 'davguij' })
-        .subscribe(
-          resp => {
-            resolve(resp);
-          },
-          err => {
-            reject(err);
-          }
-        );
+      rxiosInstance.get('http://test.com/posts', { title: 'rxios', author: 'davguij' }).subscribe(
+        (resp) => {
+          resolve(resp);
+        },
+        (err) => {
+          reject(err);
+        }
+      );
     });
     await expect(promise).resolves.toBeDefined();
   });
 
   it('accepts a type for the response', async () => {
-    interface i {
+    interface TestInterface {
       cool: boolean;
     }
 
-    const response: i = { cool: true };
+    const response: TestInterface = { cool: true };
 
     mockServer.get('/post/1').reply(200, response);
     const promise = new Promise((resolve, reject) => {
-      rxiosInstance.get<i>('http://test.com/post/1').subscribe(
-        resp => {
+      rxiosInstance.get<TestInterface>('http://test.com/post/1').subscribe(
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -117,16 +86,12 @@ describe('GET method', () => {
 });
 
 describe('POST method', () => {
-  let rxiosInstance: rxios;
+  let rxiosInstance: Rxios;
 
   beforeEach(() => {
-    rxiosInstance = new rxios({
-      baseURL: 'http://test.com/',
+    rxiosInstance = new Rxios({
+      baseURL: 'http://test.com/'
     });
-  });
-
-  afterEach(() => {
-    rxiosInstance = null;
   });
 
   it('makes a successful POST req', async () => {
@@ -134,10 +99,10 @@ describe('POST method', () => {
     const body = { title: 'json-server', author: 'davguij' };
     const promise = new Promise((resolve, reject) => {
       rxiosInstance.post('posts', body).subscribe(
-        resp => {
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -146,16 +111,14 @@ describe('POST method', () => {
   });
 
   it('throws an error on a failed POST req', async () => {
-    mockServer
-      .post('/posts')
-      .replyWithError('Request failed with status code 500');
+    mockServer.post('/posts').replyWithError('Request failed with status code 500');
 
     const promise = new Promise((resolve, reject) => {
       rxiosInstance.post('http://test.com/posts', {}).subscribe(
-        resp => {
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -165,16 +128,12 @@ describe('POST method', () => {
 });
 
 describe('rest of methods', () => {
-  let rxiosInstance: rxios;
+  let rxiosInstance: Rxios;
 
   beforeEach(() => {
-    rxiosInstance = new rxios({
-      baseURL: 'http://test.com/',
+    rxiosInstance = new Rxios({
+      baseURL: 'http://test.com/'
     });
-  });
-
-  afterEach(() => {
-    rxiosInstance = null;
   });
 
   it('makes a successful PUT req', async () => {
@@ -182,10 +141,10 @@ describe('rest of methods', () => {
     mockServer.put('/post/1').reply(200, body);
     const promise = new Promise((resolve, reject) => {
       rxiosInstance.put('post/1', body).subscribe(
-        resp => {
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -198,10 +157,10 @@ describe('rest of methods', () => {
     mockServer.patch('/post/1').reply(200, body);
     const promise = new Promise((resolve, reject) => {
       rxiosInstance.patch('post/1', body).subscribe(
-        resp => {
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );
@@ -213,10 +172,10 @@ describe('rest of methods', () => {
     mockServer.delete('/post/1').reply(200);
     const promise = new Promise((resolve, reject) => {
       rxiosInstance.delete('post/1').subscribe(
-        resp => {
+        (resp) => {
           resolve(resp);
         },
-        err => {
+        (err) => {
           reject(err);
         }
       );

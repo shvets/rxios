@@ -21,9 +21,9 @@
     "url": "https://github.com/davguij/rxios/issues"
   },
   "homepage": "https://github.com/davguij/rxios#readme",
-  "peerDependencies": {
-    "axios": "~0.17.0",
-    "rxjs": "^5.0.0"
+  "dependencies": {
+    "axios": "^0.18.0",
+    "rxjs": "^6.3.3"
   },
   "devDependencies": {
     "@types/jest": "^21.1.8",
@@ -39,7 +39,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testMatch": ["<rootDir>/__tests__/*.ts"],
+    "testMatch": ["<rootDir>/src/*.spec.ts"],
     "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json"],
     "collectCoverage": true,
     "testEnvironment": "node"
