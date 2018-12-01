@@ -1,3 +1,4 @@
-import { Rxios } from './rxios';
+import { Rxios, RxiosConfig } from './rxios';
 
-export { Rxios };
+
+export { Rxios, RxiosConfig };
