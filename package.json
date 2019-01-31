@@ -21,11 +21,9 @@
     "url": "https://github.com/davguij/rxios/issues"
   },
   "homepage": "https://github.com/davguij/rxios#readme",
-  "dependencies": {
-    "axios": "^0.18.0",
-    "rxjs": "^6.3.3"
-  },
   "devDependencies": {
+    "axios": "^0.18.0",
+    "rxjs": "^6.4.0",
     "@types/jest": "^21.1.8",
     "@types/moxios": "^0.4.8",
     "@types/nock": "^9.1.0",

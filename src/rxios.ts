@@ -54,7 +54,7 @@ export class Rxios {
       default:
         throw new Error('Method not supported');
     }
-    return new Observable<T>((subscriber) => {
+    return new Observable<T>((subscriber: any) => {
       request
         .then((response) => {
           subscriber.next(response.data);
