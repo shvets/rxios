@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
 import { Observable } from 'rxjs';
+import {Interceptors} from "./interceptors";
 
 export interface RxiosConfig extends AxiosRequestConfig {
   localCache?: boolean;
@@ -9,7 +10,7 @@ export class Rxios {
   private httpClient: AxiosInstance;
 
   // noinspection JSUnusedGlobalSymbols
-  public get interceptors(): any {
+  public get interceptors(): Interceptors {
     return this.httpClient.interceptors;
   }
 
