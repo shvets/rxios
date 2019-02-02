@@ -8,6 +8,11 @@ export interface RxiosConfig extends AxiosRequestConfig {
 export class Rxios {
   private httpClient: AxiosInstance;
 
+  // noinspection JSUnusedGlobalSymbols
+  public get interceptors(): any {
+    return this.httpClient.interceptors;
+  }
+
   public constructor(protected options: RxiosConfig = {}) {
     this.httpClient = axios.create(options);
   }

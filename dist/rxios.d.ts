@@ -6,6 +6,7 @@ export interface RxiosConfig extends AxiosRequestConfig {
 export declare class Rxios {
     protected options: RxiosConfig;
     private httpClient;
+    readonly interceptors: any;
     constructor(options?: RxiosConfig);
     get<T>(url: string, queryParams?: object): Observable<T>;
     post<T>(url: string, body: object, queryParams?: object): Observable<T>;

@@ -7,6 +7,10 @@ class Rxios {
         this.options = options;
         this.httpClient = axios_1.default.create(options);
     }
+    // noinspection JSUnusedGlobalSymbols
+    get interceptors() {
+        return this.httpClient.interceptors;
+    }
     get(url, queryParams) {
         return this._makeRequest('GET', url, queryParams);
     }
