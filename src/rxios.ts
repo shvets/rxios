@@ -38,6 +38,10 @@ export class Rxios {
     return this._makeRequest('DELETE', url, queryParams);
   }
 
+  public head(url: string, queryParams?: object) {
+    return this._makeRequest('HEAD', url, queryParams);
+  }
+
   private _makeRequest<T>(method: string, url: string, queryParams?: object, body?: object) {
     let request: AxiosPromise<T>;
     switch (method) {
@@ -55,6 +59,9 @@ export class Rxios {
         break;
       case 'DELETE':
         request = this.httpClient.delete(url, { params: queryParams });
+        break;
+      case 'HEAD':
+        request = this.httpClient.head(url, { params: queryParams });
         break;
 
       default:

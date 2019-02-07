@@ -26,6 +26,9 @@ class Rxios {
     delete(url, queryParams) {
         return this._makeRequest('DELETE', url, queryParams);
     }
+    head(url, queryParams) {
+        return this._makeRequest('HEAD', url, queryParams);
+    }
     _makeRequest(method, url, queryParams, body) {
         let request;
         switch (method) {
@@ -43,6 +46,9 @@ class Rxios {
                 break;
             case 'DELETE':
                 request = this.httpClient.delete(url, { params: queryParams });
+                break;
+            case 'HEAD':
+                request = this.httpClient.head(url, { params: queryParams });
                 break;
             default:
                 throw new Error('Method not supported');

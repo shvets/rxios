@@ -14,5 +14,6 @@ export declare class Rxios {
     put<T>(url: string, body: object, queryParams?: object): Observable<T>;
     patch<T>(url: string, body: object, queryParams?: object): Observable<T>;
     delete(url: string, queryParams?: object): Observable<{}>;
+    head(url: string, queryParams?: object): Observable<{}>;
     private _makeRequest;
 }
